@@ -20,8 +20,7 @@ WORKDIR /usr/src/app/readthedocs.org
 
 ## Install the python deps
 RUN pip install --upgrade setuptools==19.2
-COPY requirements.txt ./
-COPY requirements/ ./requirements/
+COPY . .
 RUN pip install -r requirements.txt
 
 ## Move over our hotfix for Version links

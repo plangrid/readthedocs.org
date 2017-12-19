@@ -9,7 +9,7 @@
 ## Collect Variables
 DB_LOCATION=${DB_LOCATION:-/persistent/dev.db}
 
-#export DJANGO_SETTINGS_MODULE="readthedocs.settings.sqlite"  # Which settings file should Django use
+export DJANGO_SETTINGS_MODULE="readthedocs.settings.dev"  # Which settings file should Django use
 
 #export PYTHONPATH=$(pwd):$PYTHONPATH
 
@@ -43,8 +43,6 @@ fi
 
 # collect static (this is always necessary since we never bind mount rtd
 
-echo "yes" | python ./manage.py collectstatic
+yes yes | python ./manage.py collectstatic
 
-
-#exec "gunicorn" "$@"
-exec python ./manage.py "$@"
+exec gunicorn readthedocs.wsgi

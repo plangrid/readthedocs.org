@@ -19,10 +19,10 @@ RUN apt-get update \
 WORKDIR /usr/src/app/readthedocs.org
 
 ## Install the python deps
-RUN pip3 install --upgrade setuptools==19.2
+RUN pip install --upgrade setuptools==19.2
 COPY requirements.txt ./
 COPY requirements/ ./requirements/
-RUN pip3 install -r requirements.txt
+RUN pip install -r requirements.txt
 
 ## Move over our hotfix for Version links
 COPY conf.py.tmpl ./readthedocs/doc_builder/templates/doc_builder/conf.py.tmpl

@@ -8,11 +8,15 @@ import os
 def find_all(path, filenames):
     """Find all files in ``path`` that match in ``filenames``."""
     path = os.path.abspath(path)
-    for root, dirs, files in os.walk(path, topdown=True):
-        dirs.sort()
-        for filename in filenames:
-            if filename in files:
-                yield os.path.abspath(os.path.join(root, filename))
+    try:
+        for root, dirs, files in os.walk(path, topdown=True):
+            dirs.sort()
+            for filename in filenames:
+                if filename in files:
+                    yield os.path.abspath(os.path.join(root, filename))
+    except UnicodeDecodeError:
+        # This is an error of not being able to walk the dir when there are unicode files in them :|
+        pass
 
 
 def find_one(path, filenames):
